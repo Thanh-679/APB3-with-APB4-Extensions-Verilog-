@@ -1,0 +1,138 @@
+///////////////////////////////////////////////////TOP_MODULE
+//Interface between master and external signals 
+
+///////// master takes these as inputs
+PCLK
+PRESETn
+transfer
+sys_write
+sys_addr
+sys_wdata
+sys_strb
+sys_prot
+
+///////// master takes these as outputs
+sys_rdata
+sys_PSLVERR
+
+////////////
+
+///////Interface between master and SLAVE
+// SLAVE->MASTER
+PREADY
+PRDATA
+PSLVERR
+// MASTER->SLAVE
+PSEL
+PENABLE
+PWRITE
+PADDR
+PWDATA
+PSTRB
+PPROT
+
+
+//////////////////////////////////////////////////////
+
+
+//Interface between SLAVE and external signals 
+
+/////////SLAVE takes these as inputs
+
+PCLK
+PRESETn
+busy
+
+////////Interface between master and SLAVE
+////MASTER->SLAVE
+PSEL
+PENABLE
+PWRITE
+PADDR
+PWDATA
+PSTRB
+PPROT
+////SLAVE->MASTER
+PRDATA
+PREADY
+PSLVERR
+
+
+
+
+
+////////////////////////////////////////////APB_MASTER(signals)
+
+
+///Interface between the master and external signals (the master takes these signals as inputs)
+//////// from system
+PCLK
+PRESETn
+transfer
+sys_write
+sys_addr
+sys_wdata
+sys_strb
+sys_prot
+//////// from SLAVE
+PRDATA
+PSLVERR
+PREADY
+
+///Interface between the master and external signals (the master takes these signals as outputs)
+//////// to SLAVE
+PSEL
+PENABLE
+PWRITE
+PADDR
+PWDATA
+PSTRB
+PPROT
+/////// to system
+sys_PSLVERR
+sys_rdata
+////////////// signals inside
+
+/// FSM
+IDLE_PHASE
+SETUP_PHASE
+ACCESS_PHASE
+
+///STATES
+current_state
+next_state
+
+///////Intermediate registers
+addr_reg
+write_reg
+wdata_reg
+strb_reg
+prot_reg
+
+
+///////////////////////////////////////////////////APB_SLAVE(signals)
+///Interface between SLAVE and external signals(SLAVE takes these signals as inputs)
+//////// from master
+PCLK
+PRESETn
+PADDR
+PPROT
+PSEL
+PENABLE
+PWRITE
+PWDATA
+PSTRB
+PPROT
+/////// from system
+busy
+///Interface between SLAVE and external signals(SLAVE lấy tín hiệu làm đầu ra)(đưa vào port)
+///////// to master
+PREADY
+PRDATA
+PSLVERR
+//Internal signals
+cache(memory)
+word_addr
+addr_err
+wait_PRE(wait_states(busy=1))
+And other signals.......
